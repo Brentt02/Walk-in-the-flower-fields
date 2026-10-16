@@ -1,0 +1,113 @@
+:root {
+  color-scheme: dark;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #8daab3;
+  overscroll-behavior: none;
+}
+
+#world {
+  display: block;
+  width: 100%;
+  height: 100%;
+  outline: none;
+  touch-action: none;
+}
+
+#hint {
+  position: fixed;
+  bottom: max(30px, env(safe-area-inset-bottom));
+  left: 50%;
+  width: max-content;
+  max-width: calc(100% - 36px);
+  transform: translateX(-50%);
+  color: rgba(255, 250, 231, 0.9);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-align: center;
+  line-height: 1.7;
+  text-shadow: 0 1px 8px rgba(25, 35, 32, 0.7);
+  pointer-events: none;
+  transition: opacity 1.5s;
+  z-index: 3;
+}
+
+#hint.hidden {
+  opacity: 0;
+}
+
+#joystick,
+#look-zone {
+  display: none;
+}
+
+body.touch #joystick {
+  display: block;
+  position: fixed;
+  left: max(24px, env(safe-area-inset-left));
+  bottom: max(26px, env(safe-area-inset-bottom));
+  width: 116px;
+  height: 116px;
+  border: 1px solid rgba(255, 255, 235, 0.2);
+  border-radius: 50%;
+  background: rgba(230, 240, 215, 0.055);
+  touch-action: none;
+  user-select: none;
+  z-index: 4;
+}
+
+#stick {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  left: 35px;
+  top: 35px;
+  border: 1px solid rgba(255, 255, 240, 0.25);
+  border-radius: 50%;
+  background: rgba(255, 250, 225, 0.17);
+  pointer-events: none;
+}
+
+body.touch #look-zone {
+  display: block;
+  position: fixed;
+  inset: 0 0 0 42%;
+  touch-action: none;
+  user-select: none;
+  z-index: 2;
+}
+
+body.touch #hint {
+  bottom: max(158px, calc(env(safe-area-inset-bottom) + 145px));
+}
+
+#error {
+  position: fixed;
+  left: 50%;
+  top: 24px;
+  transform: translateX(-50%);
+  max-width: min(540px, calc(100% - 32px));
+  padding: 16px 20px;
+  border-radius: 10px;
+  color: #fff4e1;
+  background: rgba(35, 43, 39, 0.94);
+  font-size: 14px;
+  line-height: 1.6;
+  z-index: 10;
+}
+
+[hidden] {
+  display: none !important;
+}

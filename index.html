@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#738c71">
+  <meta name="description"
+        content="An endless, peaceful meadow of flowers and traveling wind.">
+  <title>Evermeadow</title>
+  <link rel="stylesheet" href="./css/style.css">
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.1/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.1/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <canvas id="world" aria-label="Evermeadow, a first-person flower meadow"></canvas>
+
+  <div id="hint" role="status">
+    Click to look around · WASD to wander · A/D are inverted · Shift to move faster
+  </div>
+
+  <div id="joystick" aria-label="Movement joystick">
+    <div id="stick"></div>
+  </div>
+  <div id="look-zone" aria-label="Drag to look around"></div>
+
+  <div id="error" role="alert" hidden></div>
+
+  <script>
+    // Also covers module/CDN failures before main.js can initialize.
+    window.showEvermeadowError = function (message) {
+      const box = document.getElementById("error");
+      box.textContent = message;
+      box.hidden = false;
+    };
+
+    window.addEventListener("error", event => {
+      if (event.target instanceof HTMLScriptElement) {
+        window.showEvermeadowError(
+          "Evermeadow could not load its modules. Check your internet connection " +
+          "and open the project through a local web server."
+        );
+      }
+    }, true);
+
+    window.addEventListener("unhandledrejection", event => {
+      console.error(event.reason);
+      window.showEvermeadowError(
+        "Something interrupted Evermeadow. Reload the page. " +
+        "If this continues, check the browser console."
+      );
+    });
+  </script>
+
+  <script type="module">
+    import("./js/main.js").catch(error => {
+      console.error(error);
+      window.showEvermeadowError(
+        "Evermeadow could not start. Check that WebGL is enabled, " +
+        "your internet connection is available, and all project files exist."
+      );
+    });
+  </script>
+</body>
+</html>
